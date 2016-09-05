@@ -1,0 +1,12 @@
+.container
+  .row
+    - @videos.each do |video|
+      .col-md-3.thumb.video-thumb{ 'data-video-id': video.id }
+        = link_to '/contest/'+params[:contest_id]+'/videos/show/'+video.id.to_s, class: 'thumbnail' do
+          = image_tag video.thumbnail.url(:medium_nr)
+          %p
+            %b= video.filename
+  .row
+    .col-md-12
+      .pull-right
+        = link_to 'Upload new video', '/contest/'+params[:contest_id]+'/videos/new', class: 'btn btn-primary'

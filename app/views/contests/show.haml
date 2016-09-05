@@ -1,0 +1,41 @@
+.container
+  .row.contest-full{ 'data-contest-id': @contest.id }
+    .col-md-8
+      %h1= @contest.title
+      %p.small
+        = link_to 'Back to contest' , contests_path
+        .row
+          .col-md-6
+            = image_tag @contest.banner.url, :class => 'img-rounded'
+          .col-md-1
+          .col-sm-5
+            %h4=  'www.smarttools.com' + @contest.url
+            %h4=  @contest.date_ini
+            %h4=  @contest.date_end
+            %h4=  @contest.award
+        .row
+          %h1 Available videos for this contest
+        .row
+          - @contest.videos.each do |video|
+            .row
+              - if video.status=='Convertido'
+                .col-md-6
+                  = image_tag video.thumbnail.url(:medium_nr)
+                .col-md-1
+                .col-md-5
+                  = video.link_original.url
+                  /= video.link_converted.filename
+                  video.status
+              - else
+                .col-md-6
+                  = image_tag video.thumbnail.url(:medium_nr)
+                .col-md-1
+                .col-md-5
+                  /video.link_original.filename
+                  video.status
+    .col-md-2
+      %h1
+        = link_to 'Edit contest', edit_contest_path(@contest), class: 'btn btn-primary'
+    .col-md-2
+      %h1
+        = link_to 'Vista videos', '/contest/' + @contest.id.to_s + '/videos', class: 'btn btn-primary'

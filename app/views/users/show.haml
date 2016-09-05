@@ -1,0 +1,10 @@
+.container
+  .row
+    .col-md-12
+      %h2= @user.email
+.container
+  .row
+    - @user.contests.each do |contest|
+      .col-md-3.thumb.contest-thumb{ 'data-contest-id': contest.id }
+        = link_to contest_path, class: 'thumbnail' do
+          = image_tag contest.banner.url(:medium_nr)
